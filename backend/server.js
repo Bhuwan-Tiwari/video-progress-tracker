@@ -11,7 +11,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'https://localhost:5173',
+    'https://video-progress-frontend.onrender.com',
+    process.env.FRONTEND_URL,
+    /\.onrender\.com$/
+  ].filter(Boolean),
   credentials: true
 }));
 app.use(express.json());

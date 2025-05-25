@@ -7,10 +7,10 @@ const LecturePage = () => {
   const [serverStatus, setServerStatus] = useState('checking');
   const [userId] = useState('user1'); // In a real app, this would come from authentication
   const [videoId] = useState('lecture1');
-  
+
   // Sample video URL - you can replace this with your own video
   const videoSrc = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  
+
   // Check server status on component mount
   useEffect(() => {
     const checkServerStatus = async () => {
@@ -22,12 +22,12 @@ const LecturePage = () => {
         console.error('Server connection failed:', error);
       }
     };
-    
+
     checkServerStatus();
-    
+
     // Check server status every 30 seconds
     const interval = setInterval(checkServerStatus, 30000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -53,12 +53,12 @@ const LecturePage = () => {
         <div className="header-content">
           <h1>Video Progress Tracker</h1>
           <p className="lecture-description">
-            This system tracks your unique viewing progress. Only new content you watch 
+            This system tracks your unique viewing progress. Only new content you watch
             will count towards your progress percentage.
           </p>
-          
+
           <div className="server-status">
-            <div 
+            <div
               className="status-indicator"
               style={{ backgroundColor: getStatusColor() }}
             />
@@ -71,10 +71,10 @@ const LecturePage = () => {
         <div className="video-section">
           <h2>Sample Lecture Video</h2>
           <p className="video-description">
-            Try watching different parts of the video, skipping around, or rewatching sections. 
+            Try watching different parts of the video, skipping around, or rewatching sections.
             Notice how the progress only increases when you watch new content!
           </p>
-          
+
           {serverStatus === 'connected' ? (
             <VideoPlayer
               videoSrc={videoSrc}
@@ -87,10 +87,19 @@ const LecturePage = () => {
             <div className="server-error">
               <h3>Server Connection Required</h3>
               <p>
-                Please make sure the backend server is running on port 3001. 
-                Run the following command in the backend directory:
+                Unable to connect to the backend server. Please check:
               </p>
-              <code>npm run dev</code>
+              <ul style={{ textAlign: 'left', margin: '10px 0' }}>
+                <li>Backend server is running</li>
+                <li>Network connection is stable</li>
+                <li>API URL is configured correctly</li>
+              </ul>
+              <p><strong>Current API URL:</strong> <code>{import.meta.env.VITE_API_URL || 'http://localhost:3001/api'}</code></p>
+              {!import.meta.env.VITE_API_URL && (
+                <div style={{ marginTop: '15px', padding: '10px', background: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '6px' }}>
+                  <strong>Local Development:</strong> Run <code>npm run dev</code> in the backend directory
+                </div>
+              )}
             </div>
           )}
         </div>
