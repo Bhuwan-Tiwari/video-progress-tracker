@@ -1,5 +1,5 @@
 .video-player-container {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -113,18 +113,18 @@
   .video-player-container {
     padding: 10px;
   }
-  
+
   .video-actions {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .save-button,
   .refresh-button {
     width: 100%;
     max-width: 200px;
   }
-  
+
   .video-controls-overlay {
     top: 5px;
     right: 5px;
@@ -137,7 +137,7 @@
   .video-player-container {
     padding: 5px;
   }
-  
+
   .video-wrapper {
     border-radius: 8px;
   }
